@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Namoro</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .image-container {
+            margin-bottom: 20px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            margin: 10px;
+        }
+        #yes {
+            background-color: #28a745;
+            color: #fff;
+        }
+        #no {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+        .overlay img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            height: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="./image.png"/>
+        </div>
+        <div class="button-container">
+            <button id="yes">Sim</button>
+            <button id="no">Não</button>
+        </div>
+    </div>
+
+    <div class="overlay">
+        <img src="./batman.jpeg" />
+    </div>
+
+    <script>
+        const noButton = document.getElementById('no');
+        const yesButton = document.getElementById('yes');
+        const overlay = document.querySelector('.overlay');
+        const overlayImg = overlay.querySelector('img');
+
+        noButton.addEventListener('click', () => {
+            // Get the container's dimensions
+            const container = document.querySelector('.container');
+            const containerRect = container.getBoundingClientRect();
+
+            // Get the button's dimensions
+            const buttonRect = noButton.getBoundingClientRect();
+
+            // Randomize new position for the button
+            const newX = Math.random() * (containerRect.width - buttonRect.width);
+            const newY = Math.random() * (containerRect.height - buttonRect.height);
+
+            // Apply new position
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${newX}px`;
+            noButton.style.top = `${newY}px`;
+        });
+
+        yesButton.addEventListener('click', () => {
+            overlay.style.display = 'block';
+            overlayImg.onload = function() {
+                alert('Você disse SIM!');
+            };
+        });
+    </script>
+</body>
+</html>
